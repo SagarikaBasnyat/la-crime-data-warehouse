@@ -137,6 +137,30 @@ The structure enables efficient reporting such as:
 - Demographic crime distribution
 - Weekend vs weekday behavior
 
+## Phase 2: Exploratory Data Analysis & Feature Engineering
+
+After constructing the warehouse in PostgreSQL, I exported the Analytics Layer to Excel to perform advanced feature engineering and statistical validation. This phase focused on identifying high-intensity risk zones and seasonal volatility.
+
+### 1. Feature Engineering: Weapon Risk Intensity
+To differentiate between "high-volume" crime areas and "high-risk" crime areas, I engineered a 
+**Weapon Flag**:
+* **Logic:** Engineered a binary risk indicator using a nested Excel logical formula to handle data inconsistencies:
+=IF(OR(ISBLANK([@[weapon_desc]]), LEFT([@[weapon_desc]], 7)="UNKNOWN", [@[weapon_desc]]=""), 0, 1)
+* **Metric:** Calculated **Weapon Density %** (the average of the flag) to determine the probability of weapon presence in specific environments.
+* **Finding:** While "Streets" have the highest total crime volume, **Alleys** are the highest-intensity risk environments with a weapon involvement rate of **48.71%**.
+
+### 2. Statistical Analysis: Volatility & Resource Allocation
+I analyzed crime trends (2020–2023) to determine how LAPD should allocate resources dynamically.
+* **Coefficient of Variation (CV):** I calculated the CV (Standard Deviation / Mean) to normalize volatility across divisions with different crime volumes.
+* **Finding:** High CV scores in divisions like **Southwest** and **77th Street** indicate higher unpredictability month-to-month, suggesting these areas require more flexible staffing models compared to more "stable" divisions.
+
+### 3. Data Integrity & Volume Thresholds
+To ensure the findings were statistically sound and not skewed by outliers:
+* **Premise Filter:** Only included premises with **> 1,000 incidents** (Filtered via Excel Pivot Tables).
+* **Area Filter:** Focused on divisions with **> 45,000 incidents** to ensure large-scale significance.
+
+---
+
 ---
 
 ## File Structure
