@@ -232,7 +232,7 @@ The dashboard below compares division-level trends against the citywide baseline
 
 ![Volatility Dashboard](Visualization_2.png)
 
-## 📊 Q3: Weapon Risk by Premises Type
+## Analysis 3: Weapon Risk by Premises Type
 
 ### Project Overview
 
