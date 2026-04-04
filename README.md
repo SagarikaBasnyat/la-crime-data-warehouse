@@ -197,7 +197,7 @@ The dashboard below highlights division-level volatility alongside monthly capac
 - Monthly deviation shows clear overstaffing (positive) and understaffing (negative) periods.
 - Citywide demand remains relatively stable, suggesting that volatility is localized rather than systemic.
 
-![Volatility Dashboard](images/q1_volatility_dashboard.png)
+![Volatility Dashboard](Analysis_1.png)
 
 ## File Structure
 
