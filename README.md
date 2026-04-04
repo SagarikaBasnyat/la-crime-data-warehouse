@@ -199,6 +199,39 @@ The dashboard below highlights division-level volatility alongside monthly capac
 
 ![Volatility Dashboard](Visualization_1.png)
 
+## Analysis 2: Localized Instability vs Citywide Seasonality
+
+### Project Overview
+
+This analysis investigates whether fluctuations in crime patterns are driven by consistent citywide seasonal trends or by localized instability across LAPD divisions.
+
+---
+
+### Methodology
+
+- Aggregated monthly crime counts by division using SQL and Excel Pivot Tables  
+- Established a citywide seasonal baseline  
+- Normalized division-level activity:
+
+```excel
+Normalized Crime = Monthly Division Crimes / Division Average
+```
+Calculated Volatility
+```excel
+  Volatility = STDEV.S(normalized monthly values)
+Volatility Index = Volatility / AVERAGE(normalized values)
+```
+Key Visualization
+
+The dashboard below compares division-level trends against the citywide baseline and ranks divisions by volatility.
+
+- The citywide trend remains stable across months.
+- Several divisions consistently deviate from the baseline.
+- High-volatility divisions such as Newton and Central fluctuate beyond expected seasonal patterns.
+- This indicates that instability is localized rather than systemic.
+
+![Volatility Dashboard](Visualization_2.png)
+
 ## File Structure
 
 - la_crime_star_schema.sql → Full ETL and warehouse creation script
