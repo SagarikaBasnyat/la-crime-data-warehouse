@@ -232,6 +232,43 @@ The dashboard below compares division-level trends against the citywide baseline
 
 ![Volatility Dashboard](Visualization_2.png)
 
+## 📊 Q3: Weapon Risk by Premises Type
+
+### Project Overview
+
+This analysis identifies which premises types have the highest proportion of weapon-related incidents and how this risk varies across LAPD divisions.
+
+---
+
+### Methodology
+
+- Aggregated crime counts by premises type using SQL and Excel Pivot Tables  
+- Created a binary indicator for weapon involvement:
+
+```excel
+Weapon Flag = IF(weapon_used IS NOT NULL, 1, 0)
+```
+- Calculated weapon involvement rate:
+
+``` excel Weapon Risk = AVERAGE(Weapon Flag) ```
+
+- Filtered for high-volume data to improve reliability:
+  -Included premises with Total Crimes > 2000
+  -Focused on divisions with Total Crimes > 45,000
+
+-Compared patterns across divisions using Tableau.
+
+### Key Visualization
+
+The dashboard below highlights weapon involvement probability across premises types and divisions.
+
+- Premises such as MTA Bus, Sidewalk, and Motel show the highest weapon involvement rates.
+- High-traffic public and transit-related locations consistently exhibit elevated risk.
+- Divisions such as Newton and Southeast show higher concentrations of weapon-related incidents.
+- Lower-risk premises demonstrate more stable and predictable patterns.
+
+![Volatility Dashboard](Visualization_3.png)
+
 ## File Structure
 
 - la_crime_star_schema.sql → Full ETL and warehouse creation script
