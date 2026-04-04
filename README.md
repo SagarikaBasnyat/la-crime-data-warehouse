@@ -143,16 +143,20 @@ After constructing the warehouse in PostgreSQL, I exported the Analytics Layer t
 Excel was used for feature engineering and statistical calculations due to its flexibility in creating custom metrics, pivot-based aggregation, and rapid validation of analytical assumptions.
 Bar charts were used to visualize weapon density across premises and divisions, enabling clear comparison of high-risk categories.
 
-### 1. Feature Engineering: Weapon Risk Intensity
-To differentiate between "high-volume" crime areas and "high-risk" crime areas, I engineered a 
-**Weapon Flag**:
-* **Logic:** Engineered a binary risk indicator using a nested Excel logical formula to handle data inconsistencies:
+1. Feature Engineering: Weapon Risk Intensity
+To differentiate between "high-volume" crime areas and "high-risk" crime areas, I engineered a Weapon Flag:
+
+Logic: Engineered a binary risk indicator using a nested Excel logical formula to handle data inconsistencies and missing values:
 =IF(OR(ISBLANK([@[weapon_desc]]), LEFT([@[weapon_desc]], 7)="UNKNOWN", [@[weapon_desc]]=""), 0, 1)
-* **Metric:** Calculated **Weapon Density %** (the average of the flag) to determine the probability of weapon presence in specific environments.
-* **Finding:** While "Streets" have the highest total crime volume, **Alleys** are the highest-intensity risk environments with a weapon involvement rate of **48.71%**.
+
+Metric: Calculated Weapon Involvement Probability (the average of the flag) to determine the likelihood of weapon presence in specific environments.
+
+Finding: While "Streets" have the highest total crime volume, Sidewalks and MTA Buses are the highest-intensity risk environments, both showing a weapon involvement rate of 68%.
+
+Localized Insight: Using Tableau to drill down into this metric, I discovered that risk is not uniform across the city; for example, Hospitals show a massive variance in weapon probability—ranging from 25% to 80%—depending on the specific division (e.g., Hollywood vs. Southeast).
 
 ### 2. Statistical Analysis: Volatility & Resource Allocation
-I analyzed crime trends (2020–2023) to determine how LAPD should allocate resources dynamically.
+I analyzed crime trends (2020–2025) to determine how the LAPD should allocate resources dynamically.
 * **Coefficient of Variation (CV):** I calculated the CV (Standard Deviation / Mean) to normalize volatility across divisions with different crime volumes.
 * **Finding:** High CV scores in divisions like **Southwest** and **77th Street** indicate higher unpredictability month-to-month, suggesting these areas require more flexible staffing models compared to more "stable" divisions.
 
@@ -164,6 +168,36 @@ To ensure the findings were statistically sound and not skewed by outliers:
 ---
 
 ---
+---
+
+## Phase 3: Analytical Insights & Business Recommendations
+
+### Analysis 1: Seasonal Volatility & Dynamic Resource Allocation
+
+#### Business Question  
+Which LAPD divisions experience the greatest seasonal volatility in crime incidents, and how should resources be allocated dynamically?
+
+---
+
+#### Methodology  
+
+- Aggregated monthly crime counts by division using SQL and Excel Pivot Tables  
+- Calculated **Volatility (Standard Deviation)** across months  
+- Computed **Volatility Index (Coefficient of Variation)**:
+
+```excel
+Volatility = STDEV.S(Monthly Crime Counts)
+Volatility Index = Volatility / AVERAGE(Monthly Crime Counts)
+```
+## Key Visualization
+
+The dashboard below highlights division-level volatility alongside monthly capacity gaps and citywide demand trends. 
+
+- High volatility divisions such as Newton and Mission indicate unstable crime patterns.
+- Monthly deviation shows clear overstaffing (positive) and understaffing (negative) periods.
+- Citywide demand remains relatively stable, suggesting that volatility is localized rather than systemic.
+
+![Volatility Dashboard](images/q1_volatility_dashboard.png)
 
 ## File Structure
 
@@ -186,5 +220,4 @@ This project demonstrates:
 
 ## Author
 
-Sagarika Basnyat  
-MS in Business Analytics – University of North Texas  
+Sagarika Basnyat   
