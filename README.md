@@ -143,7 +143,7 @@ After constructing the warehouse in PostgreSQL, I exported the Analytics Layer t
 Excel was used for feature engineering and statistical calculations due to its flexibility in creating custom metrics, pivot-based aggregation, and rapid validation of analytical assumptions.
 Bar charts were used to visualize weapon density across premises and divisions, enabling clear comparison of high-risk categories.
 
-1. Feature Engineering: Weapon Risk Intensity
+### 1. Feature Engineering: Weapon Risk Intensity
 To differentiate between "high-volume" crime areas and "high-risk" crime areas, I engineered a Weapon Flag:
 
 Logic: Engineered a binary risk indicator using a nested Excel logical formula to handle data inconsistencies and missing values:
